@@ -17,29 +17,37 @@
             <div class="card-header" bg-dark>
               <h3>Create Product</h3>
             </div>
-            <form action="{{route('proudcts.store')}}" method="post"> @csrf            
+            <form action="{{route('proudcts.store')}}" method="post">
+              @csrf            
               <div class="card-body">
                 <div class="mb-3">
-                <label for="" class="form-label h5">Name</label>
-                <input type="text" class="form-control form-control-lg" placeholder="Name" name="name">
+                <label for="" class="form-label h5">name</label>
+                <input value="{{old('name')}}" type="text" class="@error('name') is-invalid @enderror form-control form-control-lg form-control" placeholder="Name" name="name">
                 @error('name')
                   <p class="invalid-feedback">{{ $message}}</p>                  
                 @enderror
               </div>
 
               <div class="mb-3">
-                <label for="" class="form-label h5">Sku</label>
-                <input type="text" class="form-control form-control-lg" placeholder="sku" name="sku">
+                <label for="" class="form-label h5">sku</label>
+                <input value="{{old('Sku')}}" type="text" class="@error('Sku') is-invalid @enderror form-control form-control-lg" placeholder="sku" name="sku">
               </div>
+              @error('sku')
+                  <p class="invalid-feedback">{{ $message}}</p>                  
+                @enderror
               
               <div class="mb-3">
-                <label for="" class="form-label h5">Price</label>
-                <input type="text" class="form-control form-control-lg" placeholder="price" name="price">
+                <label for="" class="form-label h5">price</label>
+                <input value="{{old('Price')}}" type="text" class="@error('Price') is-invalid @enderror form-control form-control-lg" placeholder="price" name="price">
               </div>
+              @error('price')
+                  <p class="invalid-feedback">{{ $message}}</p>                  
+                @enderror
               
               <div class="mb-3">
-                <label for="" class="form-label h5">Description</label>
-                <textarea placeholder="Description" class="form-control" name="Description" cols="30" rows="5"></textarea>
+                <label for="" class="form-label h5">description</label>
+                <textarea placeholder="description" class="form-control"
+                name="description" cols="30" rows="5">{{old('description')}}</textarea>
               </div>
               
               <div class="mb-3">

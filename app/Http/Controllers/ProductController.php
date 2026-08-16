@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     // This method will show product page
-    public function index() {}
+    public function index()
+    {
+        return view('products.list');
+    }
+
     // This method will create product page
     public function create()
     {
@@ -24,11 +28,22 @@ class ProductController extends Controller
             'price' => 'required|numeric',
 
         ];
-        $Validator::make($request->all(), $rules);
+
+        $Validator = Validator::make($request->all(), $rules);
 
         if ($Validator->fails()) {
-            return redirect()->route('//proudcts.create')->withInput()->withErrors();
+            return redirect()->route('proudcts.create')->withInput()->withErrors($Validator);
         }
+
+        // here we will insert product in database
+        $product = new Product();
+        $product->name = $request->name;
+        $product->sku = $request->sku;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product Added Successfully.');
     }
     // This method will show edit product page
     public function edit() {}
